@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>企业智能客服</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- ============ 侧边栏 ============ -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1>🏢 智能客服</h1>
+        <button id="newChatBtn" class="btn btn-primary btn-block">＋ 新对话</button>
+      </div>
+
+      <div class="user-box">
+        <label for="userIdInput">用户 ID（数据隔离）</label>
+        <input id="userIdInput" type="text" placeholder="例如：zhang_san" autocomplete="off" />
+      </div>
+
+      <div class="conv-list-title">历史会话</div>
+      <ul id="convList" class="conv-list"></ul>
+
+      <div class="sidebar-footer">
+        <button id="uploadToggleBtn" class="btn btn-block">📄 知识库管理</button>
+        <a href="/docs" target="_blank" class="docs-link">API 文档 ↗</a>
+      </div>
+    </aside>
+
+    <!-- ============ 主区域 ============ -->
+    <main class="main">
+      <header class="chat-header">
+        <span id="convTitle">新对话</span>
+        <span id="backendStatus" class="status-badge">连接中…</span>
+      </header>
+
+      <section id="chatBox" class="chat-box">
+        <div class="welcome" id="welcome">
+          <h2>你好，我是企业智能客服 👋</h2>
+          <p>我可以回答公司制度、流程、报销标准等问题，也支持联网搜索与数值计算。</p>
+          <div class="suggestions">
+            <button class="chip" data-q="公司的差旅报销标准是什么？">差旅报销标准</button>
+            <button class="chip" data-q="请假流程是怎样的？需要哪些审批？">请假流程</button>
+            <button class="chip" data-q="试用期转正需要满足什么条件？">转正条件</button>
+            <button class="chip" data-q="帮我计算：基础报销1200元，住宿打九折800元，交通350元，一共多少？">计算报销总额</button>
+          </div>
+        </div>
+      </section>
+
+      <footer class="chat-input">
+        <div class="input-row">
+          <textarea id="queryInput" rows="1" placeholder="输入问题，Enter 发送，Shift+Enter 换行"></textarea>
+          <button id="sendBtn" class="btn btn-primary">发送</button>
+        </div>
+        <div class="input-hint">内容由 AI 生成，请以公司正式文件为准</div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- ============ 知识库抽屉 ============ -->
+  <div id="drawerMask" class="drawer-mask"></div>
+  <aside id="drawer" class="drawer">
+    <div class="drawer-header">
+      <h2>📚 知识库管理</h2>
+      <button id="drawerCloseBtn" class="btn-close">✕</button>
+    </div>
+
+    <div class="upload-zone" id="uploadZone">
+      <input type="file" id="fileInput" accept=".pdf,.docx,.txt,.md,.csv,.xlsx,.xls" hidden />
+      <p>拖拽文件到此处，或 <span class="link">点击选择</span></p>
+      <p class="upload-hint">支持 PDF / DOCX / TXT / MD / CSV / XLSX，自动解析入库</p>
+      <div id="uploadProgress" class="upload-progress" hidden>解析并向量化中，请稍候…</div>
+    </div>
+
+    <ul id="docList" class="doc-list"></ul>
+    <div id="docEmpty" class="doc-empty">知识库暂无文档</div>
+  </aside>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
